@@ -35,8 +35,11 @@ class Game
       if @board.grid[row1][col1].face_value == @board.grid[row2][col2].face_value
         puts "Congrats, you've got a match!"
       else
+        sleep(4)
+        system("clear")
         @board.grid[row1][col1].hide
         @board.grid[row2][col2].hide
+        @board.render
       end
       @player.guesses += 1
     end
