@@ -51,7 +51,9 @@ class Board
       return  @grid[row][col].face_value
     end
     def render
-      @grid.each do |row|
+      print "  " + (0...@size).to_a.join(" ") + "\n"
+      @grid.each_with_index do |row,i|
+        print i.to_s + " "
         row.each do |card|
           if card.face_up == true
             print card.face_value
