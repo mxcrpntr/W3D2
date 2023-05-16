@@ -1,6 +1,7 @@
 require_relative "card"
 
 class Board
+    attr_reader :grid
     def initialize(size)
       if size.odd? || size <= 0
         raise "size must be even and greater than zero"
@@ -38,7 +39,11 @@ class Board
       end
     end
     def won?
-      @grid.all? {|card| card.face_up?}
+      @grid.flatten.all? {|card| card.face_up == true}
+    end
+    def valid_pos?(pos)
+      row, col = pos
+      return (row < @size && col < @size) && (row >= 0 && col >= 0)
     end
     def reveal(pos)
       row,col=pos
@@ -48,14 +53,14 @@ class Board
     def render
       @grid.each do |row|
         row.each do |card|
-          if card.face_up?
-            print card.to_s
+          if card.face_up == true
+            print card.face_value
           else
-            print "  "
+            print " "
           end
-          print "  "
+          print " "
         end
-        print "/n"
+        print "\n"
       end
     end
 end
